@@ -8,7 +8,7 @@ st.set_page_config(page_title='Prediction of Disease Outbreaks',
                    page_icon="🧑‍⚕️")
 diabetes_model= pickle.load(open(r"C:\Users\viraj\AICT diesease predict\savedfiles\diebetes_model.sav",'rb'))
 heart_disease_model=pickle.load(open(r"C:\Users\viraj\AICT diesease predict\savedfiles\heartdisease_model.sav",'rb'))
-parkinsons_model= pickle.load(open(r"C:\Users\viraj\AICT diesease predict\savedfiles\parkinsons_model.sav",'rb'))
+#parkinsons_model= pickle.load(open(r"C:\Users\viraj\AICT diesease predict\savedfiles\parkinsons_model.sav",'rb'))
 
 with st.sidebar:
     selected= option_menu('Prediction of disease outbreak system',
@@ -94,38 +94,3 @@ if selected == 'Heart Disease Prediction':
             st.error("Please enter valid numerical values for all inputs.")
 
 
-
-# Parkinson's Disease Prediction Page
-if selected == 'Parkinsons Prediction':
-    st.title("Parkinson's Disease Prediction using ML")
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        MDVP_Fo = st.text_input('MDVP (Hz)')
-        MDVP_Shimmer = st.text_input('MDVP Shimmer')
-        HNR = st.text_input('HNR')
-        D2 = st.text_input('D2')
-    with col2:
-        MDVP_Fhi = st.text_input('MDVP (Hz)')
-        MDVP_Jitter = st.text_input('MDVP Jitter')
-        RPDE = st.text_input('RPDE')
-        PPE = st.text_input('PPE')
-    with col3:
-        MDVP_Flo = st.text_input('MDVP (Hz)')
-        MDVP_dB = st.text_input('MDVP (dB)')
-        DFA = st.text_input('DFA')
-        Spread1 = st.text_input('Spread1')
-        Spread2 = st.text_input('Spread2')
-
-    parkinsons_diagnosis = ''
-    if st.button("Parkinson's Test Result"):
-        user_input = [MDVP_Fo, MDVP_Fhi, MDVP_Flo, MDVP_Jitter, MDVP_Shimmer, MDVP_dB, HNR, RPDE, DFA, Spread1, Spread2, D2, PPE]
-        user_input = [float(x) for x in user_input]
-        parkinsons_prediction = parkinsons_model.predict([user_input])
-
-        if parkinsons_prediction[0] == 1:
-            parkinsons_diagnosis = 'The person has Parkinson’s disease'
-        else:
-            parkinsons_diagnosis = 'The person does not have Parkinson’s disease'
-
-    st.success(parkinsons_diagnosis)
